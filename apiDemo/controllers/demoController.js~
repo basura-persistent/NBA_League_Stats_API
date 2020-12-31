@@ -1,0 +1,22 @@
+const dbConnection = require('../database/connector');
+
+class DemoController {
+    static async demoMethod (ctx) {
+        return new Promise((resove, reject) => {
+            dbConnection.query('Query Something!', (err, res) => {
+                try {
+                    if(err) {
+                        reject(err);
+                    }
+                    ctx.status = 200;
+                    ctx.body = res;
+                    resolve();
+                } catch(err_1) {
+                    console.log(err_1);
+                }
+            });
+        });
+    }
+}
+
+module.exports = DemoController;
